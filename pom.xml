@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.freshin2017</groupId>
-    <artifactId>fresh2017SpringMVC</artifactId>
+    <artifactId>webstore</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>demo</name>
@@ -11,6 +11,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <war-output-directory>/home/bookstore/apache-tomcat-8.5.20/webapps</war-output-directory>
     </properties>
 
     <dependencies>
@@ -40,6 +41,7 @@
     </dependencies>
 
     <build>
+        <finalName>webstore</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,6 +50,7 @@
                 <configuration>
                     <!-- web.xmlを使用しない -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <outputDirectory>${war-output-directory}</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
