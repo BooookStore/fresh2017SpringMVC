@@ -9,9 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@Configuration
-@EnableWebMvc
-@ComponentScan("com.packt.webstore")
+@Configuration // このくらすがひとつ以上の@Beanアノテーションを宣言していることを示す。
+@EnableWebMvc // Spring MVC に特化した複数のアノテーションをインポート。
+@ComponentScan("com.packt.webstore") // コンポーネントスキャンのベースとなるクラスであることを宣言。
 public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -23,7 +23,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/jsp/");
+        resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
     }

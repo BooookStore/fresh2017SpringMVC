@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <war-output-directory>/home/bookstore/apache-tomcat-8.5.20/webapps</war-output-directory>
+        <war-output-directory>/Users/honyaryousuke/Desktop/apache-tomcat-8.5.15/webapps</war-output-directory>
     </properties>
 
     <dependencies>
