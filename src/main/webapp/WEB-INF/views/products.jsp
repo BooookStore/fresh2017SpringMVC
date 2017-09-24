@@ -18,12 +18,12 @@
     <section>
         <div class="container">
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
-                <div class="thumbanil">
+                <div class="thumbnail">
                     <div class="caption">
                         <h3>${product.name}</h3>
                         <p>${product.description}</p>
                         <p>${product.unitPrice} USD</p>
-                        <p>Available ${product.unitsPrice} units in stock</p>
+                        <p>Available ${product.unitsInStock} units in stock</p>
                     </div>
                 </div>
             </div>
