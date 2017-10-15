@@ -13,12 +13,28 @@
   </head>
   <body>
     <div class="jumbotron">
-      <h1>
-        ${greeting}
-      </h1>
-      <p>
-        ${tagline}
-      </p>
+      <div class="container">
+        <h1>
+          ${greeting}
+        </h1>
+        <p>
+          ${tagline}
+        </p>
+      </div>
     </div>
+    <section class="container">
+      <section class="row">
+        <div class="col-sm-4">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="products">Products</a>
+            </li>
+            <li class="list-group-item">
+              <a href="customers">Customers</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </section>
   </body>
 </html>
