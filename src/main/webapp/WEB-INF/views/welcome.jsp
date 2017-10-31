@@ -27,7 +27,7 @@
         <div class="col-sm-4">
           <ul class="list-group">
             <li class="list-group-item">
-              <a href="products">Products</a>
+              <a href="market/products">Products</a>
             </li>
             <li class="list-group-item">
               <a href="customers">Customers</a>

@@ -23,10 +23,14 @@ public class InMemoryProductRepository implements ProductRepository {
     @Override
     public List<Product> getAllProducts() {
         Map<String, Object> params = new HashMap<>();
-        List<Product> result =
-                jdbcTemplate.query("SELECT * FROM products", params, new ProductMapper());
+        return jdbcTemplate.query("SELECT * FROM products", params, new ProductMapper());
+    }
 
-        return result;
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("category", category);
+        return jdbcTemplate.query("SELECT * FROM products WHERE category = :category", params, new ProductMapper());
     }
 
     @Override
