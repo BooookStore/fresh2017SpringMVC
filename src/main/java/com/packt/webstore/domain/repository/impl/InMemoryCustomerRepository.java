@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 組み込みデータベースに対して、顧客情報をに関する操作方法を提供。
@@ -26,6 +28,20 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     @Override
     public List<Customer> getAllCustomers() {
         return jdbcTemplate.query("SELECT * FROM customers", new CustomerMapper());
+    }
+
+    @Override
+    public List<Customer> getCustomersByFilter(Map<String, List<String>> filter) {
+        String SQL = "SELECT * FROM customers WHERE customer_id IN (:name) AND name IN (:address)";
+        return jdbcTemplate.query(SQL, filter, new CustomerMapper());
+    }
+
+    @Override
+    public Customer getCustomerById(String id) {
+        String SQL = "SELECT * FROM customers WHERE customer_id = :id";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return jdbcTemplate.queryForObject(SQL, params, new CustomerMapper());
     }
 
     /**
