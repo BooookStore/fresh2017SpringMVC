@@ -15,7 +15,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("market")
 public class ProductController {
-    //test
 
     private final String PRODUCTS = "products";
 
