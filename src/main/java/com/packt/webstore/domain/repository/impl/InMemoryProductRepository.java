@@ -35,7 +35,7 @@ public class InMemoryProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getProductByFilter(Map<String, List<String>> filterParams) {
-        String SQL = "SELECT * FROM products WHERE category IN (:categories) AND MANUFACTURER IN (:brands)";
+        String SQL = "SELECT * FROM products WHERE category IN (:categories) AND manufacture IN (:brands)";
 
         // ??? : JdbcTemplateにはマップリストの値を展開する機能があるのか
         return jdbcTemplate.query(SQL, filterParams, new ProductMapper());
