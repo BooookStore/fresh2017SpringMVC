@@ -19,7 +19,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
     <section class="container">
       <div class="row">
-        <c:forEach items="${products}" var="product">
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
               <div class="caption">
@@ -33,7 +32,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               </div>
             </div>
           </div>
-        </c:forEach>
       </div>
     </section>
   </body>

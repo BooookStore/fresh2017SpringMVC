@@ -34,6 +34,22 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
+    public List<Product> getProductByFilter(Map<String, List<String>> filterParams) {
+        String SQL = "SELECT * FROM products WHERE category IN (:categories) AND MANUFACTURER IN (:brands)";
+
+        // ??? : JdbcTemplateにはマップリストの値を展開する機能があるのか
+        return jdbcTemplate.query(SQL, filterParams, new ProductMapper());
+    }
+
+    @Override
+    public Product getProductById(String productId) {
+        String SQL = "SELECT * FROM products WHERE id = :id";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", productId);
+        return jdbcTemplate.queryForObject(SQL, params, new ProductMapper());
+    }
+
+    @Override
     public void updateStock(String productId, long noOfUnits) {
         String SQL = "UPDATE PRODUCTS SET UNITS_IN_STOCK =:unitsInStock WHERE ID = :id";
         Map<String, Object> params = new HashMap<>();
