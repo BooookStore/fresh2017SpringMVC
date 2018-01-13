@@ -5,13 +5,16 @@ package com.packt.webstore.domain;
  */
 public class Customer {
 
-    String customerId;
+    public Customer() {
+    }
 
-    String name;
+    private String customerId;
 
-    String address;
+    private String name;
 
-    int noOfOrdersMade;
+    private String address;
+
+    private int noOfOrdersMade;
 
     /**
      * 全ての顧客情報を初期化

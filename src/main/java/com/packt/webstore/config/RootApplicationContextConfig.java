@@ -16,7 +16,6 @@ public class RootApplicationContextConfig {
 
     @Bean
     public DataSource dataSource() {
-
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase db = builder
                 .setType(EmbeddedDatabaseType.HSQL)
@@ -28,7 +27,6 @@ public class RootApplicationContextConfig {
 
     @Bean
     public NamedParameterJdbcTemplate getJdbcTemplate() {
-
         return new NamedParameterJdbcTemplate(dataSource());
     }
 }

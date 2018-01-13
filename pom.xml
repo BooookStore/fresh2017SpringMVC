@@ -49,6 +49,11 @@
             <version>2.3.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring3</artifactId>
+            <version>3.0.9.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -61,7 +66,7 @@
                 <configuration>
                     <!-- web.xmlを使用しない -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <outputDirectory>/Users/honyaryousuke/Desktop/apache-tomcat-8.5.15/webapps</outputDirectory>
+                    <outputDirectory>/home/bookstore/apache-tomcat-8.5.20/webapps</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

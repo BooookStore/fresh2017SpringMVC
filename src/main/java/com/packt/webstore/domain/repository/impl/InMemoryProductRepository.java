@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,8 +16,11 @@ import com.packt.webstore.domain.repository.ProductRepository;
 @Repository
 public class InMemoryProductRepository implements ProductRepository {
 
-    @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    public InMemoryProductRepository(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Product> getAllProducts() {
@@ -55,6 +57,35 @@ public class InMemoryProductRepository implements ProductRepository {
         Map<String, Object> params = new HashMap<>();
         params.put("unitsInStock", noOfUnits);
         params.put("id", productId);
+        jdbcTemplate.update(SQL, params);
+    }
+
+    @Override
+    public void addNewProduct(Product product) {
+        String SQL = "INSERT INTO PRODUCTS (ID, "
+                + "NAME,"
+                + "DESCRIPTION,"
+                + "UNIT_PRICE,"
+                + "MANUFACTURER,"
+                + "CATEGORY,"
+                + "CONDITION,"
+                + "UNITS_IN_STOCK,"
+                + "UNITS_IN_ORDER,"
+                + "DISCONTINUED) "
+                + "VALUES (:id, :name, :desc, :price, :manufacturer, :category, :condition, :inStock, :inOrder, :discontinued)";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", product.getProductId());
+        params.put("name", product.getName());
+        params.put("desc", product.getDescription());
+        params.put("price", product.getUnitPrice());
+        params.put("manufacturer", product.getManufacturer());
+        params.put("category", product.getCategory());
+        params.put("condition", product.getCondition());
+        params.put("inStock", product.getUnitsInStock());
+        params.put("inOrder", product.getUnitsInOrder());
+        params.put("discontinued", product.isDiscontinued());
+
         jdbcTemplate.update(SQL, params);
     }
 

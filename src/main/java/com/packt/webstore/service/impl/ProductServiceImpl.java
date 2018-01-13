@@ -9,12 +9,17 @@ import org.springframework.stereotype.Service;
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.domain.repository.ProductRepository;
 import com.packt.webstore.service.ProductService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public void updateAllStock() {
@@ -39,5 +44,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(String productId) {
         return productRepository.getProductById(productId);
+    }
+
+    @Override
+    public void addNewProduct(Product newProduct) {
+        productRepository.addNewProduct(newProduct);
     }
 }

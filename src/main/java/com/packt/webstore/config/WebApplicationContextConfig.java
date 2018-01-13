@@ -1,15 +1,16 @@
 package com.packt.webstore.config;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.util.UrlPathHelper;
+import org.thymeleaf.spring3.view.ThymeleafView;
+import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 
 @Configuration // このくらすがひとつ以上の@Beanアノテーションを宣言していることを示す。
 @EnableWebMvc // Spring MVC に特化した複数のアノテーションをインポート。
@@ -21,13 +22,34 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
+//    @Bean
+//    public InternalResourceViewResolver getInternalResourceViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setViewClass(JstlView.class);
+//        resolver.setPrefix("/WEB-INF/views/");
+//        resolver.setSuffix(".jsp");
+//        return resolver;
+//    }
+
     @Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        return resolver;
+    public ThymeleafView getThymeleafView() {
+        return new ThymeleafView();
+    }
+
+    @Bean
+    public ThymeleafViewResolver getThymeleafViewResolver() {
+        ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
+        thymeleafViewResolver.setOrder(1);
+        thymeleafViewResolver.setTemplateEngine();
+        thymeleafViewResolver.setViewNames(new String[] {"*.html", ".xhtml"});
+
+        return thymeleafViewResolver;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/img/**")
+                .addResourceLocations("/resources/images/");
     }
 
     /**
@@ -42,4 +64,10 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         configurer.setUrlPathHelper(urlPathHelper);
     }
 
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("messages");
+        return source;
+    }
 }

@@ -17,4 +17,5 @@ public interface ProductRepository {
 
     void updateStock(String productId, long noOfUnits);
 
+    void addNewProduct(Product newProduct);
 }

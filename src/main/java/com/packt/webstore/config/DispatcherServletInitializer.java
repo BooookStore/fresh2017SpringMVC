@@ -14,8 +14,6 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
     /**
      * ControllerやJSPのファイルの場所などのプロパティを設定。
-     *
-     * @return
      */
     @Override
     protected Class<?>[] getServletConfigClasses() {
