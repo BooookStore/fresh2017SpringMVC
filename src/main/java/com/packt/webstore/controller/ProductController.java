@@ -1,14 +1,16 @@
 package com.packt.webstore.controller;
 
+import com.packt.webstore.domain.Product;
+import com.packt.webstore.exception.NoProductsFondUnderCategoryException;
+import com.packt.webstore.exception.ProductNotFoundException;
 import com.packt.webstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.MatrixVariable;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +33,11 @@ public class ProductController {
 
     @RequestMapping("/products/{category}")
     public String getProductsByCategory(@PathVariable String category, Model model) {
-        model.addAttribute("products", productService.getProductByCategory(category));
+        List<Product> products = productService.getProductByCategory(category);
+        if (products == null || products.isEmpty()) {
+            throw new NoProductsFondUnderCategoryException();
+        }
+        model.addAttribute("products", products);
         return PRODUCTS;
     }
 
@@ -52,6 +58,16 @@ public class ProductController {
     public String getProductById(@RequestParam("id") String productId, Model model) {
         model.addAttribute("product", productService.getProductById(productId));
         return PRODUCT;
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ModelAndView handleError(HttpServletRequest req, ProductNotFoundException exception) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("invalidProductId", exception.getProductId());
+        mav.addObject("exception", exception);
+        mav.addObject("url", req.getRequestURL() + "?" + req.getQueryString());
+        mav.setViewName("productNotFound");
+        return mav;
     }
 
 }
