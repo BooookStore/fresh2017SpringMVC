@@ -61,7 +61,6 @@
                 <configuration>
                     <!-- web.xmlを使用しない -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <outputDirectory>/Users/honyaryousuke/Desktop/apache-tomcat-8.5.15/webapps</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
