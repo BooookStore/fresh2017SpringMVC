@@ -29,8 +29,9 @@ public class ProductController {
         return PRODUCTS;
     }
 
-    @RequestMapping("/products/{cateory}")
+    @RequestMapping("/products/{category}")
     public String getProductsByCategory(@PathVariable String category, Model model) {
+        model.addAttribute("products", productService.getProductByCategory(category));
         return PRODUCTS;
     }
 

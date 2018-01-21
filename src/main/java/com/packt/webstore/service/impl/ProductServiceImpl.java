@@ -40,4 +40,9 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(String productId) {
         return productRepository.getProductById(productId);
     }
+
+    @Override
+    public List<Product> getProductByCategory(String category) {
+        return productRepository.getProductsByCategory(category);
+    }
 }
