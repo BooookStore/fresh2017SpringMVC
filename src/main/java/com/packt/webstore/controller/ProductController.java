@@ -18,17 +18,13 @@ import java.util.Map;
 @RequestMapping("market")
 public class ProductController {
 
-    private final String PRODUCTS = "products";
-
-    private final String PRODUCT = "product";
-
     @Autowired
     ProductService productService;
 
     @RequestMapping("/products")
     public String list(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return PRODUCTS;
+        return "products";
     }
 
     @RequestMapping("/products/{category}")
@@ -38,7 +34,7 @@ public class ProductController {
             throw new NoProductsFondUnderCategoryException();
         }
         model.addAttribute("products", products);
-        return PRODUCTS;
+        return "products";
     }
 
     @RequestMapping("/update/stock")
@@ -51,13 +47,26 @@ public class ProductController {
     public String getProductsByFilter(@MatrixVariable(pathVar = "params") Map<String, List<String>> filterParams,
                                       Model model) {
         model.addAttribute("products", productService.getProductsByFilter(filterParams));
-        return PRODUCTS;
+        return "products";
     }
 
     @RequestMapping("/product")
     public String getProductById(@RequestParam("id") String productId, Model model) {
         model.addAttribute("product", productService.getProductById(productId));
-        return PRODUCT;
+        return "product";
+    }
+
+    @RequestMapping(value = "/product/add", method = RequestMethod.GET)
+    public String getAddNewProductForm(Model model) {
+        Product product = new Product();
+        model.addAttribute("newProduct", product);
+        return "addProduct";
+    }
+
+    @RequestMapping(value = "/product/add", method = RequestMethod.POST)
+    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product) {
+        this.productService.addProduct(product);
+        return "redirect:/market/products";
     }
 
     @ExceptionHandler(ProductNotFoundException.class)

@@ -122,11 +122,8 @@ public class Product implements Serializable {
             return false;
         Product other = (Product) obj;
         if (productId == null) {
-            if (other.productId != null)
-                return false;
-        } else if (!productId.equals(other.productId))
-            return false;
-        return true;
+            return other.productId == null;
+        } else return productId.equals(other.productId);
     }
 
     @Override
