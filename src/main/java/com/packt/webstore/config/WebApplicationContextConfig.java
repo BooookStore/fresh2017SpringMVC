@@ -10,9 +10,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.util.UrlPathHelper;
 
-@Configuration // このくらすがひとつ以上の@Beanアノテーションを宣言していることを示す。
-@EnableWebMvc // Spring MVC に特化した複数のアノテーションをインポート。
-@ComponentScan("com.packt.webstore") // コンポーネントスキャンのベースとなるクラスであることを宣言。
+@Configuration
+@EnableWebMvc
+@ComponentScan("com.packt.webstore")
 public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -35,11 +35,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("/resources/images/");
     }
 
-    /**
-     * セミコロンを含んだURLを許可する。
-     *
-     * @param configurer
-     */
+    /** セミコロンを含んだURLを許可する。 */
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         UrlPathHelper urlPathHelper = new UrlPathHelper();
@@ -47,6 +43,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         configurer.setUrlPathHelper(urlPathHelper);
     }
 
+    /** 画面に表示されるメッセージプロパティファイルを指定する */
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource resource = new ResourceBundleMessageSource();

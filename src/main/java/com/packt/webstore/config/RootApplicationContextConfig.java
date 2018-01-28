@@ -26,7 +26,6 @@ public class RootApplicationContextConfig {
 
     @Bean
     public NamedParameterJdbcTemplate getJdbcTemplate() {
-
         return new NamedParameterJdbcTemplate(dataSource());
     }
 }

@@ -12,11 +12,6 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
         return new Class[]{RootApplicationContextConfig.class};
     }
 
-    /**
-     * ControllerやJSPのファイルの場所などのプロパティを設定。
-     *
-     * @return
-     */
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{WebApplicationContextConfig.class};
