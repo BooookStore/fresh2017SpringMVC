@@ -8,9 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ProcessingTimeIntercepter implements HandlerInterceptor {
+public class processingTimeInterceptor implements HandlerInterceptor {
 
-    private static final Logger LOGGER = Logger.getLogger(ProcessingTimeIntercepter.class);
+    private static final Logger LOGGER = Logger.getLogger(processingTimeInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {

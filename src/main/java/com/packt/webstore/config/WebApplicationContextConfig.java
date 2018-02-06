@@ -1,6 +1,6 @@
 package com.packt.webstore.config;
 
-import com.packt.webstore.intercepter.ProcessingTimeIntercepter;
+import com.packt.webstore.intercepter.processingTimeInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -72,6 +72,6 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-       registry.addInterceptor(new ProcessingTimeIntercepter());
+       registry.addInterceptor(new processingTimeInterceptor());
     }
 }
