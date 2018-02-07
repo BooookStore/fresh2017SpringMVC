@@ -19,27 +19,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // ログインに使用するユーザ名、パスワードのパラメータ名を指定
-        httpSecurity.formLogin().loginPage("/login")
-                .usernameParameter("userId")
-                .passwordParameter("password");
-
-        // ログイン成功、失敗のURLを指定
-        httpSecurity.formLogin()
-                .defaultSuccessUrl("/market/products/add")
-                .failureForwardUrl("/login?error");
-
-        // ログアウト後のページを指定
-        httpSecurity.logout()
-                .logoutSuccessUrl("/login?logout");
+//        // ログインに使用するユーザ名、パスワードのパラメータ名を指定
+//        httpSecurity.formLogin().loginPage("/login")
+//                .usernameParameter("userId")
+//                .passwordParameter("password");
+//
+//        // ログイン成功、失敗のURLを指定
+//        httpSecurity.formLogin()
+//                .defaultSuccessUrl("/market/products/add")
+//                .failureForwardUrl("/login?error");
+//
+//        // ログアウト後のページを指定
+//        httpSecurity.logout()
+//                .logoutSuccessUrl("/login?logout");
 
         // ログイン管理をする対象のページを指定
-        httpSecurity.authorizeRequests()
+        httpSecurity
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/**/add").access("hasRole('ADMIN')")
-                .antMatchers("/**/market").access("hasRole('USER')");
+                .antMatchers("/**/market").access("hasRole('USER')")
+                .and()
 
-        httpSecurity.csrf().disable();
+                // ログインに使用するユーザ名、パスワードのパラメータ名を指定
+                .formLogin().loginPage("/login")
+                .usernameParameter("userId")
+                .passwordParameter("password")
+                .loginProcessingUrl("/login_process")
+
+                // ログイン成功、失敗のURLを指定
+                .defaultSuccessUrl("/market/products/add")
+                .failureForwardUrl("/login?error")
+                .and()
+
+                .logout()
+                .logoutSuccessUrl("/login?logout");
+
     }
 
 }

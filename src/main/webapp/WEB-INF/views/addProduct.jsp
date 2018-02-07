@@ -16,6 +16,7 @@
         </div>
     </div>
 </section>
+<a href="<c:out value="/logout"/>">Logout</a>
 <section class="container">
     <form:form method="POST" modelAttribute="newProduct" class="form-horizontal" enctype="multipart/form-data">
         <fieldset>
