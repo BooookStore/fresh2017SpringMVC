@@ -26,7 +26,7 @@
                     <h3 class="panel-title">Please sign in</h3>
                 </div>
                 <div class="panel-body">
-                    <c:url var="loginUrl" value="/login_process"/>
+                    <c:url var="loginUrl" value="/login"/>
                     <form action="${loginUrl}" method="post" class="form-horizontal">
 
                         <c:if test="${param.error != null}">
