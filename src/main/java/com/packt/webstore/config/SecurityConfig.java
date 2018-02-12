@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login")
                 .usernameParameter("userId")
                 .passwordParameter("password")
-                .loginProcessingUrl("/login_process")
+                .loginProcessingUrl("/login")
 
                 // ログイン成功、失敗のURLを指定
                 .defaultSuccessUrl("/market/products/add")
