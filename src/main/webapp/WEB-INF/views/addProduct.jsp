@@ -19,6 +19,7 @@
 <a href="<c:out value="/logout"/>">Logout</a>
 <section class="container">
     <form:form method="POST" modelAttribute="newProduct" class="form-horizontal" enctype="multipart/form-data">
+        <form:errors path="*" cssClass="alert alert-danger" element="div"/>
         <fieldset>
             <legend>Add new product</legend>
 
@@ -27,6 +28,7 @@
                         code="addProduct.form.productId.label"/></label>
                 <div class="col-lg-10">
                     <form:input id="productId" path="productId" type="text" class="form:input-large"/>
+                    <form:errors path="productId" cssClass="text-danger"/>
                 </div>
             </div>
 
@@ -35,6 +37,7 @@
                         code="addProduct.form.name.label"/></label>
                 <div class="col-lg-10">
                     <form:input id="name" path="name" type="text" class="form:input-large"/>
+                    <form:errors path="name" cssClass="text-danger"/>
                 </div>
             </div>
 
@@ -43,6 +46,7 @@
                         code="addProduct.form.unitPrice.label"/></label>
                 <div class="col-lg-10">
                     <form:input id="unitPrice" path="unitPrice" type="text" class="form:input-large"/>
+                    <form:errors path="unitPrice" cssClass="text-danger"/>
                 </div>
             </div>
 

@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
 
                 // ログイン成功、失敗のURLを指定
-                .defaultSuccessUrl("/market/products/add")
+                .defaultSuccessUrl("/market/product/add")
                 .failureUrl("/login?error")
                 .and()
 

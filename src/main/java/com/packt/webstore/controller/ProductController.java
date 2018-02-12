@@ -5,13 +5,16 @@ import com.packt.webstore.exception.NoProductsFondUnderCategoryException;
 import com.packt.webstore.exception.ProductNotFoundException;
 import com.packt.webstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +69,15 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/add", method = RequestMethod.POST)
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product, HttpServletRequest request) {
+    public String processAddNewProductForm(
+            @ModelAttribute("newProduct") @Valid Product product,
+            BindingResult result,
+            HttpServletRequest request) {
+
+        if (result.hasErrors()) {
+            return "addProduct";
+        }
+
         MultipartFile productImage = product.getProductImage();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
         if (productImage != null && !productImage.isEmpty()) {
