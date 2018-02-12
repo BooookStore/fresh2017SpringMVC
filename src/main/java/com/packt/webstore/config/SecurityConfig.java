@@ -19,20 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        // ログインに使用するユーザ名、パスワードのパラメータ名を指定
-//        httpSecurity.formLogin().loginPage("/login")
-//                .usernameParameter("userId")
-//                .passwordParameter("password");
-//
-//        // ログイン成功、失敗のURLを指定
-//        httpSecurity.formLogin()
-//                .defaultSuccessUrl("/market/products/add")
-//                .failureForwardUrl("/login?error");
-//
-//        // ログアウト後のページを指定
-//        httpSecurity.logout()
-//                .logoutSuccessUrl("/login?logout");
-
         // ログイン管理をする対象のページを指定
         httpSecurity
                 .csrf().disable()
@@ -50,12 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // ログイン成功、失敗のURLを指定
                 .defaultSuccessUrl("/market/products/add")
-                .failureForwardUrl("/login?error")
+                .failureUrl("/login?error")
                 .and()
 
                 .logout()
                 .logoutSuccessUrl("/login?logout");
-
     }
 
 }
