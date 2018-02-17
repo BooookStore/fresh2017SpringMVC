@@ -4,11 +4,13 @@ import com.packt.webstore.domain.Product;
 import com.packt.webstore.exception.NoProductsFondUnderCategoryException;
 import com.packt.webstore.exception.ProductNotFoundException;
 import com.packt.webstore.service.ProductService;
+import com.packt.webstore.validator.UnitsInStockValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +27,14 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    private UnitsInStockValidator unitsInStockValidator;
+
+    @InitBinder
+    public void initialiseBinder(WebDataBinder binder) {
+        binder.setValidator(unitsInStockValidator);
+    }
 
     @RequestMapping("/products")
     public String list(Model model) {
