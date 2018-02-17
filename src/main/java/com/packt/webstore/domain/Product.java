@@ -1,5 +1,6 @@
 package com.packt.webstore.domain;
 
+import com.packt.webstore.validator.Category;
 import com.packt.webstore.validator.ProductId;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +28,7 @@ public class Product implements Serializable {
 
     private String manufacturer;
 
+    @Category
     private String category;
 
     private long unitsInStock;
